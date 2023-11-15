@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/hamafind/hamafind.css}">
+</th:block>
+
+<div layout:fragment="content">
+  <body>
+  <!-- 하마찾기 -->
+  <div class="container__hf">
+    <div class="hama__find">
+      <h2>하마찾기</h2>
+
+<!--      포트폴리오 목록-->
+      <div class="list_box" id="list_box">
+
+      </div>
+    </div>
+  </div>
+
+  <script src = "/js/hamafind.js"></script>
+  </body>
+</div>
+</html>

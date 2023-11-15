@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -68,5 +69,19 @@ public class MemberDAOImpl implements MemberDAO {
     Integer cnt = template.queryForObject(sql, param, Integer.class);
 
     return cnt == 1 ? true : false ;
+  }
+
+  @Override
+  public Long updateGubun(Long member_id, Long gubun) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("update member ");
+    sql.append("set gubun = 1 ");
+    sql.append("where member_id = :member_id");
+
+    Map<String, Object> param = Map.of("member_id", member_id);
+
+    Long cnt = (long) template.update(sql.toString(), param);
+
+    return cnt;
   }
 }

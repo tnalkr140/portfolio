@@ -10,5 +10,5 @@ public class SessionForm {
   private Long member_id;
   private String email;
   private String nickname;
-  private String gubun;
+  private Long gubun;
 }

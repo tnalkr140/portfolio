@@ -10,4 +10,6 @@ public interface MemberDAO {
   Boolean nickExist (String nickname);
 
   Member insert(Member member);
+
+  Long updateGubun(Long member_id, Long gubun);
 }

@@ -1,0 +1,83 @@
+* { margin: 0; padding: 0;
+  color: var(--color-font1);
+  /* outline: 1px solid grey; */
+}
+/* 컬러 */
+:root {
+  --color-font1: #003;
+  /* 글자색 */
+  --color-font2: #bbb;
+  /* 서브 글자색 */
+  --color-font3: #f0f0f0;
+  /* 밝은 회색 */
+
+  --color-bg1: #00B0FA;
+  /* 밝은 배경색 */
+  --color-bg2: #039;
+  /* 어두운 배경색 */
+}
+.container__pf {
+  display: grid;
+  grid-template-columns: 1fr 1024px 1fr;
+  grid-template-areas: ". main .";
+}
+.portfolio {
+  display: flex;
+  grid-area: main;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+}
+
+/* 제목 */
+.portfolio_title{
+  height: 100px;
+  width: 800px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  border-bottom: 1px solid var(--color-bg1);
+  font-size: 30px;
+}
+
+/* 본문 */
+.pf_box{
+  /* background-color: gold; */
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.pf_nick, .pf_url, .pf_cont, .pf_pic{
+  display: flex;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-font3);
+  width: 600px;
+  text-align: center;
+}
+.pf_nick input, .pf_url input, .pf_cont input, .pf_pic input{
+  border: none;
+  padding: 0 5px;
+  text-align: center;
+}
+.cont_input{
+  height: 100px;
+  background-color: #bbb;
+  text-align: flex-start;
+}
+.pf_nick .nickname, .pf_url .urlLink, .pf_cont .content, .pf_pic .pic{
+  background-color: var(--color-bg2);
+  width: 100px;
+  text-align: center; 
+  margin-right: 20px;
+  color: #fff;
+  font-weight: 500;
+}
+#user, #comment, #camera{
+  color: red;
+  font-size: 20px;
+}

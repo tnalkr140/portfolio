@@ -73,6 +73,7 @@ public class LoginController {
     SessionForm sessionForm = new SessionForm(
         member.getMember_id(), member.getEmail(), member.getNickname(),member.getGubun()
     );
+    log.info("sessionForm={}",sessionForm);
     httpSession.setAttribute("sessionForm",sessionForm);
     mv.setViewName("redirect:"+redirectUrl);
     mv.addObject("loginForm",loginForm);

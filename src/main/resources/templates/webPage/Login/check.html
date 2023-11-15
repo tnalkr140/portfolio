@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=IBM+Plex+Sans+KR:wght@300&family=Jua&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@400;600&family=Roboto&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ba16334cfd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/common/btn.css"> <!-- 버튼 css -->
+    <link rel="stylesheet" href="../css/common/font.css"> <!-- 폰트 css -->
+    <link rel="stylesheet" href="../css/common/header.css"> <!-- 헤더 CSS-->
+    <link rel="stylesheet" href="../css/common/footer_color.css"> <!-- 푸터 컬러 CSS-->
+    <link rel="stylesheet" href="../css/common/footer_style.css"> <!-- 푸터 스타일 CSS-->
+    <link rel="stylesheet" href="../css/signUp.css"> <!-- 회원가입 JS -->
+    <script src="../js/signUp.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+        integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+        crossorigin="anonymous"></script> <!-- 카카오톡 가입 SDK 통합 -->
+    <script>
+        // Kakao SDK 초기화
+        window.Kakao.init("여기에_애플리케이션_키_입력");
+
+        // Kakao 로그인 버튼 클릭 시 실행될 함수
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile_nickname, account_email',
+                success: function (authObj) {
+                    console.log(authObj);
+                    // 사용자 정보를 가져와서 처리할 수 있습니다.
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+    
+    <div class="sign__main">
+        <div class="sign__title">
+            <h2>회&nbsp;&nbsp;&nbsp;&nbsp;원&nbsp;&nbsp;&nbsp;&nbsp;가&nbsp;&nbsp;&nbsp;&nbsp;입</h2>
+        </div>
+        <div class="sign__container">
+            <div class="forms">
+                <div class="form nickname">
+                    <h5>닉네임</h5>
+                    <div class="formsWrap">
+                        <input class="txt txt_id" type="text" placeholder=" 닉네임(별명)을 입력하세요." name="nickname">
+                        <input class="submit" id="nickCheck" type="submit" value="중복확인">
+                    </div>
+                </div>
+                <div class="form email">
+                    <h5>이메일</h5>
+                    <div class="formsWrap">
+                        <input class="txt txt_email" type="text" placeholder=" example@address.com" name="email">
+                        <input class="submit" id="emailCheck" type="submit" value="중복확인">
+                    </div>
+                </div>
+                <div class="form password_1">
+                    <h5>비밀번호</h5>
+                    <input class="txt txt_pw1" type="password" placeholder=" 6~20자 이하로 입력하세요." name="pw1">
+                </div>
+                <div class="form password_2">
+                    <h5>비밀번호 확인</h5>
+                    <input class="txt txt_pw2" type="password" placeholder=" 비밀번호를 재입력하세요." name="pw2">
+                </div>
+            </div>
+            <div class="check">
+                <div class="all">
+                    <span class="checkbox" onclick="toggleAllCheckboxes(this)">
+                        <i class="fa-regular fa-square"></i>
+                        (필수) 전체 동의</span>
+                </div>
+                <div class="each">
+                    <div class="each each1">
+                        <span class="checkbox" onclick="toggleCheckbox(this)">
+                            <i class="fa-regular fa-square"></i>
+                            (필수) 이용약관 동의</span>
+                        <span><a href=""> 자세히</a></span>
+                    </div>
+                    <div class="each each2">
+                        <span class="checkbox" onclick="toggleCheckbox(this)">
+                            <i class="fa-regular fa-square"></i>
+                            (필수) 개인정보 수집 및 이용 동의</span>
+                        <span><a href=""> 자세히</a></span>
+                    </div>
+                    <div class="each each3">
+                        <span class="checkbox" onclick="toggleCheckbox(this)">
+                            <i class="fa-regular fa-square"></i>
+                            (필수) 14세 이상입니다.</span>
+                        <span><a href=""> 자세히</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="btn sign" id="signUp" type="submit" value="회원가입"> <a href="test.html">회원가입</a>
+                </div>
+
+
+                    <!-- <div class="btn kakao" id="kakao-login-btn"> 카카오톡으로 간편 가입</div> -->
+                <div class="col-lg-12 text-center mt-3 ">
+                    <!-- <button class="btn btn-block waves-effect waves-light btn-rounded btn-outline-info mb-3"></button> -->
+                    <img alt="카카오로그인" src="https://developers.kakao.com/tool/resource/static/img/button/kakaosync/complete/ko/kakao_login_medium_wide.png"
+                        onclick="loginWithKakao()">
+                </div>
+                
+                <!-- 카카오 로그인 -->
+                <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js" charset="utf-8"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        Kakao.init('e5aa9c905ccd14d66dac1eb3245e2571');
+                        Kakao.isInitialized();
+                    });
+
+                    function loginWithKakao() {
+                        Kakao.Auth.authorize({
+                            redirectUri: 'http://localhost:5501/kakao_callback'
+                        }); // 등록한 리다이렉트uri 입력
+                    }
+                </script>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+
+</html>

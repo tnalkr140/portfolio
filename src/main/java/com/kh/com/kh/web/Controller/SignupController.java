@@ -3,6 +3,7 @@ package com.kh.com.kh.web.Controller;
 
 import com.kh.com.kh.domain.dao.entity.Member;
 import com.kh.com.kh.domain.svc.MemberSVC.MemberSVC;
+import com.kh.com.kh.domain.svc.MemberSVC.s_MemberSVC;
 import com.kh.com.kh.web.form.memberForm.SignupForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class SignupController {
 
   private final MemberSVC memberSVC;
+  //수미 추가
+  private final s_MemberSVC s_memberSVC;
 
   @GetMapping("/signup")
   public ModelAndView signUp(SignupForm signupForm){
@@ -46,18 +49,59 @@ public class SignupController {
 
     Optional<Member> byMember = memberSVC.findByInfo(signupForm.getEmail());
     Boolean nicknameCNT = memberSVC.nickExist(signupForm.getNickname());
+    Boolean emailCNT = s_memberSVC.emailExist(signupForm.getEmail());
 
-    if(!byMember.isEmpty()){
-      bindingResult.rejectValue("email","equal",null);
+//    if(!byMember.isEmpty()){
+//      bindingResult.rejectValue("email","equal",null);
+//      mv.setViewName("webPage/Login/signup");
+//      return mv;
+//    }
+//    //수미 추가 이메일 중복 확인
+//    if(emailCNT) {
+//      bindingResult.rejectValue("email", "equal", null);
+//      mv.setViewName("webPage/Login/signup");
+//      return mv;
+//    }
+//    //nicknameCNT가 1일시 참이다 1이면 존재함으로 오류 발생
+//    if(nicknameCNT){
+//      bindingResult.rejectValue("nickname","equal",null);
+//      mv.setViewName("webPage/Login/signup");
+//      return mv;
+//    }
+//    //수미 추가 비밀번호 확인
+//    if(!signupForm.getPasswd().equals(signupForm.getPasswdck())){
+//      bindingResult.rejectValue("passwdck", "member");
+//      mv.setViewName("webPage/Login/signup");
+//      return mv;
+//    }
+//    //수미 추가 약관 동의
+//    if(!signupForm.isTerms() || !signupForm.isPrivacy() || !signupForm.isAge()) {
+//      bindingResult.rejectValue("check", "manual");
+//      mv.setViewName("webPage/Login/signup");
+//      return mv;
+//    }
+
+    //이메일이 중복될 때
+    if (emailCNT) {
+      bindingResult.rejectValue("email", "equal", null);
       mv.setViewName("webPage/Login/signup");
       return mv;
-    }
-    //nicknameCNT가 1일시 참이다 1이면 존재함으로 오류 발생
-    if(nicknameCNT){
-      bindingResult.rejectValue("nickname","equal",null);
+    } //닉네임이 중복될 때
+    else if (nicknameCNT) {
+      bindingResult.rejectValue("nickname", "equal", null);
       mv.setViewName("webPage/Login/signup");
       return mv;
-    }
+    } //비밀번호와 비밀번호 확인 불일치
+    else if (!signupForm.getPasswd().equals(signupForm.getPasswdck())) {
+      bindingResult.rejectValue("passwdck", "member");
+      mv.setViewName("webPage/Login/signup");
+      return mv;
+    } //약관 체크 미동의
+    else if (!signupForm.isTerms() || !signupForm.isPrivacy() || !signupForm.isAge()) {
+      bindingResult.rejectValue("check", "manual");
+      mv.setViewName("webPage/Login/signup");
+      return mv;
+    } //모든 유효성 검사 패스
 
     Member member = new Member();
     member.setEmail(signupForm.getEmail());

@@ -11,8 +11,10 @@ public class Member {
   private String passwd;
   private String nickname;
   private String hobby;
-  private String gubun;
+  private Long gubun;
   private byte[] pic;
   private LocalDateTime cdate;
   private LocalDateTime udate;
+
+  //수미가 gubun Long타입으로 변경
 }

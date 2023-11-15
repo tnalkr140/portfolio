@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}">
+      
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/portfolio/portfolio.css}">
+</th:block>
+<th:block layout:fragment="script">
+</th:block>
+<div layout:fragment="content">
+  <script src="https://kit.fontawesome.com/ba16334cfd.js" crossorigin="anonymous"></script>
+  <body>
+  <div class="container__pf">
+    <div class="portfolio">
+      <h2 class="portfolio_title">포트폴리오</h2>
+        <div class="pf_nick">
+          <div class="nickname">닉네임</div>
+          <div class="nick_input" th:text="${session.sessionForm.nickname}"></div>
+
+        </div>
+        <form action="" method="post" th:object="${portfolioForm}">
+        <div class="pf_title">
+          <div class="title">제목</div>
+          <div>
+            <input class="title_input" type="text" name="pf_title" th:value="${portfolioForm.pf_title}"/>
+          </div>
+
+          <!--           th:field="*{title}"-->
+        </div>
+        <div class="pf_cont">
+          <div class="content">본인 소개</div>
+          <div>
+            <input class="content_input" type="text" name="pf_content" th:value="${portfolioForm.pf_content}"/>
+          </div>
+<!--          th:field="*{content}"-->
+        </div>
+      <input class="pf_btn_submit" type="submit" value="등록" th:if="${session.sessionForm.gubun != 1}">
+        </form>
+      <form action="/portfolio/update" method="post" th:object="${portfolioForm}">
+        <input class="pf_btn_update" type="submit" value="수정" th:if="${session.sessionForm.gubun == 1}">
+      </form>
+      <form action="" method="post" >
+        <div>
+          <button type="submit" id="btnDelete" th:if="${session.sessionForm.gubun == 1}">삭제</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+<!--    document.getElementById('btnDelete').addEventListener('click', e=> {-->
+<!--      if(confirm('삭제하시겠습니까?')) {-->
+<!--        const pf_id = e.target.dataset.pf_id;-->
+
+<!--        (async () => {-->
+<!--          const url = `/pf_del/${pf_id}`;-->
+<!--          const option = {-->
+<!--            method : 'DELETE'-->
+<!--          }-->
+<!--          const result = await fetch(url, option);-->
+<!--          location.href = '/portfolio';-->
+<!--        })();-->
+<!--      }-->
+<!--    }-->
+  </script>
+  </body>
+</div>
+</html>
